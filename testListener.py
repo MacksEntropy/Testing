@@ -25,7 +25,7 @@ def listen_on_port(port):
         print("Server closed.")
 
 # Specify the port to listen on
-port = 8000
+port = 80
 
 # Start listening on the specified port
 listen_on_port(port)
