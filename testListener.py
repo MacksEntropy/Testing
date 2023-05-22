@@ -1,46 +1,31 @@
-import socket
+import http.server
+import socketserver
+
+class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        # Customize the response
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        self.wfile.write(b"Hello, World!")
 
 def listen_on_port(port):
-    # Create a socket object
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    
+    # Set up the server with a custom request handler
+    handler = MyRequestHandler
+    server = socketserver.TCPServer(('', port), handler)
+
+    print(f"Listening on port {port}...")
+
     try:
-        # Bind the socket to a specific address and port
-        sock.bind(('localhost', port))
-        
-        # Listen for incoming connections
-        sock.listen(1)
-        
-        print(f"Listening on port {port}...")
-        
-        while True:
-            # Accept a connection
-            conn, addr = sock.accept()
-            
-            print(f"Connected by {addr}")
-            
-            # Receive data from the client
-            data = conn.recv(1024)
-            
-            if not data:
-                break
-            
-            # Process the received data
-            print(f"Received data: {data.decode('utf-8')}")
-            
-            # Send a response back to the client
-            response = "Message received"
-            conn.sendall(response.encode('utf-8'))
-            
-    except socket.error as e:
-        print(f"Socket error: {e}")
-        
-    finally:
-        # Close the connection
-        sock.close()
+        # Start the server and keep it running until interrupted
+        server.serve_forever()
+    except KeyboardInterrupt:
+        # Close the server gracefully on keyboard interrupt
+        server.server_close()
+        print("Server closed.")
 
 # Specify the port to listen on
-port = 80
+port = 8000
 
 # Start listening on the specified port
 listen_on_port(port)
