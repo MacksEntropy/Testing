@@ -1,7 +1,7 @@
 import boto3
 import ast
 
-sqs = boto3.client('sqs')
+sqs = boto3.client('sqs',  region_name='us-east-1',)
 
 response = sqs.list_queues()
 
