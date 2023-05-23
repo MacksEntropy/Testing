@@ -12,7 +12,7 @@ def api_listener():
     print(data)
 
     # Return a response if needed
-    return 'Received the request successfully'
+    return 'Received the request successfully', 200
 
 if __name__ == '__main__':
     app.run()
