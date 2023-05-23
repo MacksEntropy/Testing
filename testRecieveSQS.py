@@ -1,14 +1,16 @@
 import boto3
 import ast
 
-sqs = boto3.client('sqs',  region_name='us-east-1',)
+sqs = boto3.client('sqs')
 
-response = sqs.list_queues()
+# response = sqs.list_queues()
 
-devQURL = response['QueueUrls'][1]
+# devQURL = response['QueueUrls'][1]
+
+workerQURL = https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-05jyxhEAt2jx
 
 # Receive message from SQS queue
-lmao = sqs.receive_message(QueueUrl=devQURL)
+lmao = sqs.receive_message(QueueUrl=workerQURL)
 
 message = lmao['Messages'][0]
 MessageBody = message['Body']

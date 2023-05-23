@@ -3,13 +3,11 @@ import ast
 
 sqs = boto3.client('sqs')
 
-response = sqs.list_queues()
-
-devQURL = response['QueueUrls'][1]
+workerQURL = https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-05jyxhEAt2jx
 
 # Send message to SQS queue
 response = sqs.send_message(
-    QueueUrl=devQURL,
+    QueueUrl=workerQURL,
     DelaySeconds=10,
     #Message body must be str
     MessageBody=(
@@ -18,4 +16,4 @@ response = sqs.send_message(
     )
 )
 
-print('SENT: ', response['MessageId'])
+print('SENT')
