@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route('/')
 def api_listener():
     # Handle the incoming request here
     # You can access the request data using request.data or request.json
