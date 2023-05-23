@@ -7,7 +7,7 @@ sqs = boto3.client('sqs')
 
 # devQURL = response['QueueUrls'][1]
 
-workerQURL = https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-05jyxhEAt2jx
+workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-uWgPfmgopwVg"
 
 # Receive message from SQS queue
 lmao = sqs.receive_message(QueueUrl=workerQURL)
