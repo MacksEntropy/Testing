@@ -3,7 +3,7 @@ import ast
 
 sqs = boto3.client('sqs')
 
-workerQURL = https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-05jyxhEAt2jx
+workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-uWgPfmgopwVg"
 
 # Send message to SQS queue
 response = sqs.send_message(
