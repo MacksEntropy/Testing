@@ -1,18 +1,23 @@
-from flask import Flask
+from flask import Flask, request, Response
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/',methods=['POST'])
 def api_listener():
     # Handle the incoming request here
     # You can access the request data using request.data or request.json
 
     # Example: Print the received JSON payload
-    data = request.json
-    print(data)
+    try:
+        data = request.json
+        print("Data is ",data)
+        print(data.keys())
+    except Exception as e:
+        print("Exception occurd: ", e)
 
-    # Return a response if needed
-    return 'Received the request successfully', 200
+    response = Response("Message Recieved", status=200)
+    return response
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    # Args for setting host and port for worker instance host="localhost", port=8000
+    app.run(debug= True,use_reloader=True)

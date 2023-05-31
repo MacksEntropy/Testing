@@ -7,22 +7,24 @@ sqs = boto3.client('sqs')
 
 # devQURL = response['QueueUrls'][1]
 
-workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-yhtkzv3pfz-stack-AWSEBWorkerQueue-uWgPfmgopwVg"
+workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/aisnips-webapi-worker-dev-queue"
+
+print(sqs.attributes(QueueUrl=workerQURL))
 
 # Receive message from SQS queue
-lmao = sqs.receive_message(QueueUrl=workerQURL)
+# testMessage = sqs.receive_message(QueueUrl=workerQURL)
 
-message = lmao['Messages'][0]
-MessageBody = message['Body']
-# print('Message Body is ', type(MessageBody) ,MessageBody)
-dictBody = ast.literal_eval(MessageBody)
-print('Dict Body is ', type(dictBody) ,dictBody['Leadsheet'])
+# message = testMessage['Messages'][0]
+# # MessageBody = message['Body']
+# # print('Message Body is ', type(MessageBody) ,MessageBody)
+# # dictBody = ast.literal_eval(MessageBody)
+# print(message)
 
 
-# Delete received message from queue
-receipt_handle = message['ReceiptHandle']
-sqs.delete_message(
-    QueueUrl=devQURL,
-    ReceiptHandle=receipt_handle
-)
-print('Received and deleted message: %s' % message)
+# # Delete received message from queue
+# receipt_handle = message['ReceiptHandle']
+# sqs.delete_message(
+#     QueueUrl=workerQURL,
+#     ReceiptHandle=receipt_handle
+# )
+# print('Received and deleted message: %s' % message)
