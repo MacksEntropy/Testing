@@ -25,5 +25,5 @@ while True:
     connection, address = serversocket.accept()
     buf = connection.recv(64)
     if len(buf) > 0:
-        print buf
+        print(buf)
         break
