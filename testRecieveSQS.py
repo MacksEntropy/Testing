@@ -1,13 +1,13 @@
 import boto3
 import ast
 
-sqs = boto3.client('sqs')
+sqs = boto3.client('sqs', region_name='us-east-1')
 
 # response = sqs.list_queues()
 
 # devQURL = response['QueueUrls'][1]
 
-workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/aisnips-webapi-worker-dev-queue"
+workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-jwefkxph2y-stack-AWSEBWorkerQueue-5wbpw3m5cFth"
 
 print(sqs.attributes(QueueUrl=workerQURL))
 
