@@ -9,14 +9,14 @@ sqs = boto3.client('sqs', region_name='us-east-1')
 
 workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-jwefkxph2y-stack-AWSEBWorkerQueue-5wbpw3m5cFth"
 
-print(sqs.attributes(QueueUrl=workerQURL))
+# print(sqs.attributes(QueueUrl=workerQURL))
 
 # Receive message from SQS queue
-# testMessage = sqs.receive_message(QueueUrl=workerQURL)
+testMessage = sqs.receive_message(QueueUrl=workerQURL)
 
-# message = testMessage['Messages'][0]
-# # MessageBody = message['Body']
-# # print('Message Body is ', type(MessageBody) ,MessageBody)
+message = testMessage['Messages'][0]
+MessageBody = message['Body']
+print('Message Body is ', type(MessageBody) ,MessageBody)
 # # dictBody = ast.literal_eval(MessageBody)
 # print(message)
 
