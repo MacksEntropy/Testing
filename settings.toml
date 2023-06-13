@@ -1,0 +1,5 @@
+[default]
+paths.ROOT='/home/cougarnet.uh.edu/aicovarr/Documents/AC_findm_sig/first_run'
+
+[testing]
+paths.ROOT='/home/cougarnet.uh.edu/aicovarr/Documents/AC_findm_sig/first_run'
