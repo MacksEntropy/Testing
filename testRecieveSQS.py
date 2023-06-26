@@ -7,7 +7,7 @@ sqs = boto3.client('sqs', region_name='us-east-1')
 
 # devQURL = response['QueueUrls'][1]
 
-workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-jwefkxph2y-stack-AWSEBWorkerQueue-5wbpw3m5cFth"
+workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-k87p9duqsv-stack-AWSEBWorkerQueue-rOlbYfDCB9ob"
 
 # print(sqs.attributes(QueueUrl=workerQURL))
 
