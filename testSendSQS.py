@@ -1,19 +1,33 @@
 import boto3
-import ast
+import uuid
 
-sqs = boto3.client('sqs')
+def send_sqs_message(queue_url, message_body,message_group_id):
+    # Create an SQS client
+    sqs = boto3.client('sqs')
 
-workerQURL = "https://sqs.us-east-1.amazonaws.com/355974637362/awseb-e-k87p9duqsv-stack-AWSEBWorkerQueue-rOlbYfDCB9ob"
+    # Generate a unique message deduplication ID
+    deduplication_id = str(uuid.uuid4())
 
-# Send message to SQS queue
-response = sqs.send_message(
-    QueueUrl=workerQURL,
-    DelaySeconds=10,
-    #Message body must be str
-    MessageBody=(
-        str({'Leadsheet': 'leadsheet.csv',
-        'jobName' : 'job1'})
+    # Send a message to the specified queue
+    response = sqs.send_message(
+        QueueUrl=queue_url,
+        MessageBody=message_body,
+        MessageGroupId=message_group_id,
+        MessageDeduplicationId=deduplication_id
     )
-)
 
-print('SENT')
+    # Check if the message was sent successfully
+    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+        print(f'Message sent successfully to message group: {message_group_id}.')
+    else:
+        print('Failed to send message.')
+
+if __name__ == "__main__":
+    # Example usage
+    queue_url = "https://sqs.us-east-1.amazonaws.com/355974637362/AISNIPS-testCCQ.fifo"
+    message = 'Hello, scraper!'
+    message_group_id = 'scraper'
+    send_sqs_message(queue_url, message, message_group_id)
+    message = 'Hello, worker!'
+    message_group_id = 'worker'
+    send_sqs_message(queue_url, message, message_group_id)
