@@ -1,8 +1,7 @@
 import boto3
 
-from mockJob import MockJob
 
-def receive_sqs_message(queue_url, message_group_id):
+def receive_sqs_message(queue_url : str, message_group_id : str) -> str | None:
 
     sqs = boto3.client('sqs', region_name='us-east-1')
 
@@ -20,23 +19,20 @@ def receive_sqs_message(queue_url, message_group_id):
 
         # Check if the received message has the expected MessageGroupId
         if message['Attributes']['MessageGroupId'] == message_group_id:
-            # Process the received message
-            print('Received message:', message['Body'])
+            msg = message['Body']
 
             # Delete the message from the queue
             sqs.delete_message(
                 QueueUrl=queue_url,
                 ReceiptHandle=receipt_handle
             )
-
-
-            m = MockJob()
-            m.run()
-
+            return msg
         else:
             print(f'No messages in queue from group id: {message_group_id}')
+            return
     else:
         print('No messages in the queue.')
+        return
 
 
 if __name__ == "__main__":
@@ -44,4 +40,4 @@ if __name__ == "__main__":
     queue_url = "https://sqs.us-east-1.amazonaws.com/355974637362/AISNIPS-testCCQ.fifo"
     message_group_id = 'scraper'
     print(f"Recieving message from group id: {message_group_id}")
-    receive_sqs_message(queue_url,message_group_id)
+    msg = receive_sqs_message(queue_url,message_group_id)
